@@ -106,6 +106,101 @@ public class ArrayStructure {
 		return indexWithValue.isEmpty() ? "None" : indexWithValue;
 	}
 
+	/**
+	 * 
+	 * Performs bubbleSort to sort the array.
+	 * 
+	 */
+	public void bubbleSort() {
+		for (var i = 0; i < arraySize; i++) {
+			for (var j = 0; j < arraySize - 1 - i; j++) {
+				if (theArray[j] > theArray[j + 1]) {
+					swapValues(j, j + 1);
+				}
+			}
+
+		}
+	}
+
+	/**
+	 * 
+	 * Performs swapValues to swap two elements in the array.
+	 * 
+	 * @param indexOne first index for sort and indexTwo is second index for sort.
+	 */
+	public void swapValues(int indexOne, int indexTwo) {
+		var temp = theArray[indexOne];
+		theArray[indexOne] = theArray[indexTwo];
+		theArray[indexTwo] = temp;
+	}
+
+	/**
+	 * 
+	 * Performs binary search for a value in the array. only works for sorted
+	 * elements
+	 * 
+	 * @return The index of the value if found, otherwise "-1".
+	 */
+	public int binarySearchForValue(int value) {
+		var lowIndex = 0;
+		var highIndex = arraySize - 1;
+
+		while (lowIndex <= highIndex) {
+
+			var middleIndex = (highIndex + lowIndex) / 2;
+			if (theArray[middleIndex] < value) {
+				lowIndex = middleIndex + 1;
+			} else if (theArray[middleIndex] > value) {
+				highIndex = middleIndex - 1;
+			} else {
+				lowIndex = highIndex + 1;
+				return middleIndex;
+
+			}
+
+		}
+
+		return -1;
+
+	}
+
+	/**
+	 * 
+	 * Performs selectionSort to sort the array.
+	 * 
+	 */
+	public void selectionSort() {
+		for (var i = 0; i < arraySize; i++) {
+			var minValue = i;
+			for (var j = i; j < arraySize; j++) {
+				if (theArray[minValue] > theArray[j]) {
+					minValue = j;
+				}
+			}
+			swapValues(i, minValue);
+		}
+	}
+
+	/**
+	 * 
+	 * Performs insertionSort to sort the array.
+	 * 
+	 */
+	public void insertionSort() {
+		for (var i = 1; i < arraySize; i++) {
+			var j = 1;
+			var toInsert = theArray[i];
+
+			while (j > 0 && theArray[j - 1] > toInsert) {
+				theArray[j] = theArray[j - 1];
+				j--;
+			}
+
+			theArray[j] = toInsert;
+		}
+
+	}
+
 	public static void main(String[] args) {
 		var newArray = new ArrayStructure();
 		newArray.generateRandomArray();
@@ -119,5 +214,22 @@ public class ArrayStructure {
 		newArray.insetValue(22);
 		newArray.printArray();
 		System.out.println("The value found in " + newArray.linearSearchForValue(12));
+		newArray.bubbleSort();
+		newArray.printArray();
+		var returnValue = newArray.binarySearchForValue(35);
+		if (returnValue != -1) {
+			System.out.println("\nFound a match for " + 35 + " at index " + returnValue);
+		} else {
+			System.out.println("\nNo match for " + 35 + " at any index ");
+		}
+		newArray.generateRandomArray();
+		newArray.printArray();
+		newArray.selectionSort();
+		newArray.printArray();
+		newArray.generateRandomArray();
+		newArray.printArray();
+		newArray.insertionSort();
+		newArray.printArray();
 	}
 }
+
