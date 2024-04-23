@@ -3,7 +3,7 @@
  * MergeString.java
  * Author: Abhijeet c
  * Course:  Practice clean code
- * Assignment: MergeString
+ * Assignment: java_assignment
  * Due Date: None
  * Version: 1.0
  */
